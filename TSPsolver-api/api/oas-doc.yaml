@@ -4,14 +4,15 @@ info:
   title: Travel Salesman Problem Stress API
   description: >-
     This is a Travel Salesman Problem API for stress analysis and benchmarking
-    (Bootstraped with https://github.com/pafmon/oas-wizard and https://github.com/isa-group/oas-generator)  
+    (Bootstraped with https://github.com/pafmon/oas-wizard and
+    https://github.com/isa-group/oas-generator)  
   contact:
     name: FaustinoAV
     email: fauayaver@alum.us.es
     url: ''
   license:
     name: MIT
-    url: 'http: //opensource.org/licenses/MIT'
+    url: 'http://opensource.org/licenses/MIT'
 paths:
   /api/v1/problems:
     post:
@@ -38,21 +39,21 @@ paths:
               $ref: '#/components/schemas/problem'
         description: Problem to be created
         required: true
-  '/api/v1/stress/{itemNumber}/{maxWeight}':
+  '/api/v1/stress/{routesNumber}/{maxWeight}':
     get:
       x-router-controller: apiv1stressController
       description: Returns a stressRequest by problem
       operationId: getStress
       parameters:
-        - name: itemNumber
+        - name: routesNumber
           in: path
-          description: Number of items for the generated problem
+          description: Number of routes for the generated problem
           required: true
           schema:
             type: number
         - name: maxWeight
           in: path
-          description: Max weight of each item in the generated problem
+          description: Max weight of each route in the generated problem
           required: true
           schema:
             type: number
@@ -68,8 +69,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/errorModel'        
-  '/api/v1/stress/info':
+                $ref: '#/components/schemas/errorModel'
+  /api/v1/stress/info:
     get:
       x-router-controller: apiv1stressController
       description: Returns the performance info about system status
@@ -86,7 +87,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/errorModel'        
+                $ref: '#/components/schemas/errorModel'
 components:
   schemas:
     errorModel:
@@ -110,93 +111,45 @@ components:
         problem:
           type: object
           properties:
-            items:
+            matrizNxN:
               type: array
               uniqueItems: true
               minItems: 1
               items:
+                type: array
+                items:
+                  type: integer
                 required:
-                  - item
-                  - value
-                properties:
-                  item:
-                    type: string
-                    minLength: 1
-                  value:
-                    type: number
-            size:
-              type: number
+                  - routes
           required:
-            - items
-            - size
+            - matrizNxN
         solution:
           type: object
           properties:
-            items:
+            routes:
               type: array
               uniqueItems: true
               minItems: 1
               items:
+                type: integer
                 required:
-                  - item
-                  - value
+                  - routes
                 properties:
-                  item:
-                    type: string
-                    minLength: 1
-                  value:
-                    type: number
-            size:
-              type: number
+                  route:
+                    type: integer
             stats:
-                type: object
-                properties:
-                  solvingTime:
-                    type: number
-                required:
-                  - solvingTime
+              type: object
+              properties:
+                solvingTime:
+                  type: number
+              required:
+                - solvingTime
           required:
-            - items
-            - size
+            - routes
             - stats
       required:
         - id
         - problem
-    stressRequest:
-      description: ''
-      type: object
-      properties:
-        problem:
-          type: string
-          minLength: 1
-        parameters:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            required:
-              - id
-              - value
-            properties:
-              id:
-                type: string
-                minLength: 1
-              value:
-                type: number
-        config:
-          type: object
-          properties:
-            maxMemory:
-              type: number
-            maxTime:
-              type: number
-          required:
-            - maxMemory
-            - maxTime
-      required:
-        - problem
-        - parameters
-        - config
     stressResult:
       description: ''
       type: object

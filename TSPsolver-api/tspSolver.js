@@ -31,7 +31,7 @@ function creaMatriz(n, m, max) {
     return matriz;
 };
 
-async function asyncCall(rutas) {
+async function asyncCall(rutas, max) {
     console.log(creaMatriz(rutas, rutas, max));
     var beginHR = process.hrtime()
     var begin = beginHR[0] * 1000000 + beginHR[1] / 1000;
@@ -50,4 +50,4 @@ async function asyncCall(rutas) {
     console.log("time: " + roundedDuration);
 }
 
-asyncCall(rutas);
+asyncCall(rutas, max);
