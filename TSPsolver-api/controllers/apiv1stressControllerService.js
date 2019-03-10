@@ -1,9 +1,8 @@
 'use strict'
+const tsp = require('../tspSolver');
 
 module.exports.getStress = function getStress(req, res, next) {
-  res.send({
-    message: 'This is the mockup controller for test getStress'
-  });
+  res.send(tsp.solver([], req.routesNumber.value, req.maxWeight.value));
 };
 
 module.exports.getStressInfo = function getStressInfo(req, res, next) {

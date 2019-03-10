@@ -1,14 +1,14 @@
 var solver = require('node-tspsolver');
 var matriz = [];
-var rutas = 5;
-var max = 90;
+// var rutas = 5;
+// var max = 90;
 
-// var costMatrix = [
-//     ['0', 0, 0, 0, 0],
-//     ['0', '0', 6, 2, 3],
-//     ['0', 5, '0', 3, 1],
-//     ['0', 2, 9, '0', 5],
-//     ['0', 3, 5, 5, '0']
+// var matriz = [
+//     [0, 0, 0, 0, 0],
+//     [0, 0, 6, 2, 3],
+//     [0, 5, 0, 3, 1],
+//     [0, 2, 9, 0, 5],
+//     [0, 3, 5, 5, 0]
 // ];
 // console.log(costMatrix);
 
@@ -31,13 +31,17 @@ function creaMatriz(n, m, max) {
     return matriz;
 };
 
-async function asyncCall(rutas, max) {
+async function asyncCall(matriz, rutas, max) {
+
     console.log(creaMatriz(rutas, rutas, max));
+
     var beginHR = process.hrtime()
     var begin = beginHR[0] * 1000000 + beginHR[1] / 1000;
-    console.log('solving');
+    console.log('solving'); 
 
-    await solver.solveTsp(creaMatriz(rutas, rutas, max), true, {})
+    matriz = (rutas > 0) ? creaMatriz(rutas, rutas, max) : matriz;
+
+    await solver.solveTsp(matriz, true, {})
         .then(function (result) {
             console.log(result); // result is an array of indices specifying the route.
         });
@@ -50,4 +54,6 @@ async function asyncCall(rutas, max) {
     console.log("time: " + roundedDuration);
 }
 
-asyncCall(rutas, max);
+// asyncCall([], 4, 15);
+
+module.exports.solver = asyncCall;
