@@ -14,7 +14,7 @@ ENV PORT $PORT
 EXPOSE $PORT
 
 WORKDIR /opt/app
-COPY package*.json ./
+COPY package*.json ./TSPsolver-api/
 
 RUN npm install && npm cache clean --force
 COPY . /opt/app
