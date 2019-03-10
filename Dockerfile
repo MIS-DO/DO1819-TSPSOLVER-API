@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:alpine
 
 RUN mkdir -p /opt/app
 
@@ -14,7 +14,7 @@ ENV PORT $PORT
 EXPOSE $PORT
 
 WORKDIR /opt/app
-COPY package*.json ./TSPsolver-api/
+COPY package.json package-lock.json* ./
 
 RUN npm install && npm cache clean --force
 COPY . /opt/app
