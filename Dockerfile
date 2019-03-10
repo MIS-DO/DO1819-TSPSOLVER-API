@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:10.14-stretch-slim
 
 RUN mkdir -p /opt/app
 
