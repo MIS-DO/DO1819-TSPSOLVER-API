@@ -22,7 +22,7 @@ npm install
 npm start
 ```
 
-Then, if running in localhost, you can check the swagger UI doc portal in: `http://localhost:8080/`
+Then, if running in localhost, you can check the swagger UI doc portal in: `http://localhost:3000/`
 
 ### Using the API
 

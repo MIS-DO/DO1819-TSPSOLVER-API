@@ -126,8 +126,7 @@ components:
           type: object
           properties:
             routes:
-              type: array
-              uniqueItems: true
+              type: array 
               minItems: 1
               items:
                 type: integer

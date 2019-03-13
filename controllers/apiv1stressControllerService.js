@@ -2,7 +2,18 @@
 const tsp = require('../tspSolver');
 
 module.exports.getStress = function getStress(req, res, next) {
-  res.send(tsp.solver([], req.routesNumber.value, req.maxWeight.value));
+  var stressRequest = req.stressRequest.value;
+
+  tsp.solver([], req.routesNumber.value, req.maxWeight.value).then(result => {
+    var getResponse = {
+      "problem": stressRequest.problem,
+      "parameters": stressRequest.parameters,
+      "info": result.info,
+      "result": result.result
+    };
+    res.send(getResponse); 
+  });
+  
 };
 
 module.exports.getStressInfo = function getStressInfo(req, res, next) {
