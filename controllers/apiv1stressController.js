@@ -14,7 +14,11 @@ module.exports.getStress = function getStress(req, res, next) {
         "id": "maxWeight",
         "value": req.swagger.params.maxWeight.value
       }
-    ]
+    ],
+    "config": {
+      "maxMemory": -1,
+      "maxTime": -1
+    },
   };
   req.swagger.params.stressRequest = {
     "value": stressRequest

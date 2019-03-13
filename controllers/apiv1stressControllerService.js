@@ -8,8 +8,9 @@ module.exports.getStress = function getStress(req, res, next) {
     var getResponse = {
       "problem": stressRequest.problem,
       "parameters": stressRequest.parameters,
+      "config":stressRequest.config,
       "info": result.info,
-      "result": result.result
+      "result": result.result 
     };
     res.send(getResponse); 
   });
