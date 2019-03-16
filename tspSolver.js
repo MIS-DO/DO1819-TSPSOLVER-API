@@ -1,7 +1,6 @@
 var solver = require('node-tspsolver');
 const v8 = require('v8');
 
-// var matriz = [];
 // var rutas = 5;
 // var max = 90;
 
@@ -11,9 +10,8 @@ const v8 = require('v8');
 //     [0, 5, 0, 3, 1],
 //     [0, 2, 9, 0, 5],
 //     [0, 3, 5, 5, 0]
-// ];
-// console.log(costMatrix);
-
+// ]; 
+// console.log(asyncCall());
 function creaMatriz(n, m, max) {
     var matrizInterna = [];
 
@@ -33,7 +31,7 @@ function creaMatriz(n, m, max) {
     return matriz;
 };
 
-async function asyncCall(matriz, rutas, max, req) {
+async function asyncCall(matriz, rutas, max) {
     var requestResponse = {};
 
     var stressResponse = {};
@@ -116,9 +114,9 @@ async function asyncCall(matriz, rutas, max, req) {
         var beginHR = process.hrtime()
         var begin = beginHR[0] * 1000000 + beginHR[1] / 1000;
 
-        await solver.solveTsp(tsProblem, true, {})
+       /* await*/ solver.solveTsp(tsProblem, true, {})
             .then(function (result) {
-                //      betterRoute = result; result is an array of indices specifying the route.
+               // console.log(result); result is an array of indices specifying the route.
             });/*******/
 
         var endHR = process.hrtime()
@@ -174,7 +172,7 @@ async function asyncCall(matriz, rutas, max, req) {
         // console.log(betterRoute);
         // console.log("time: " + roundedDuration);
 
-        var solution = {
+        solution = {
             "routes": betterRoute,
             "stats": {
                 "solvingTime": roundedDuration
